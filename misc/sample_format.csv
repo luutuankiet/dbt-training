@@ -1,0 +1,27 @@
+id,question,answer,original_id
+1,"A data engineer is troubleshooting a connection issue with their data warehouse. They need to verify the database connection and check for any potential issues with their dbt project setup. Which command provides the most relevant debugging information for verifying the database connection?
+================================================
+ANSWERS
+A) dbt test - Runs tests on models to ensure data quality
+B) dbt debug - Tests the database connection and provides setup information 
+C) dbt parse - Parses the project files for errors
+D) dbt run - Executes the models in the project
+================================================
+TOPICS:
+source configuration,debugging,dbt commands","================================================
+B
+================================================
+dbt debug is specifically designed to test database connections and project setup. It validates profiles.yml configuration and checks dependencies installation.",1
+2,"A data engineer is tasked with creating a YAML file for a new analysis in a dbt project. What are the essential components that must be included in the YAML file for the analysis to be valid?
+================================================
+ANSWERS
+A) Version number and analysis name only
+B) Version number, analysis name, and column list with names/descriptions/data types
+C) Analysis name and column list only 
+D) Version number and column list only
+================================================
+TOPICS:
+yaml,model configuration,documentation","================================================
+B
+================================================
+Valid YAML files require version number, analysis name, and detailed column specifications including names, descriptions and data types to ensure proper model documentation.",2
