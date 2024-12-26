@@ -1,3 +1,8 @@
+# Reference Answer: Declare Data Sources
+
+Here is the reference YAML configuration for declaring data sources in dbt:
+
+```yaml
 sources:
   - name: ecom
     schema: dbt_training_Y24
@@ -21,3 +26,4 @@ sources:
         description: One record per SKU for items sold in stores
       - name: raw_supplies
         description: One record per supply per SKU of items sold in stores
+```
