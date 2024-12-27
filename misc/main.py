@@ -3,7 +3,7 @@ import re
 
 def process_questions(input_file, output_file):
     df = pd.read_csv(input_file)
-    new_df = pd.DataFrame(columns=['id', 'question', 'answer', 'original_id'])
+    new_df = pd.DataFrame(columns=['id', 'question', 'answer'])
     
     for index, row in df.iterrows():
         selections = row['selections'] if 'selections' in row else ''
@@ -20,7 +20,7 @@ ANSWERS
 {selections}
 ================================================
 TOPICS:
-{row['topic']}"""
+{row['topics']}"""
 
         # Handle answer formatting
         answer = str(row['answer'])
@@ -35,10 +35,13 @@ TOPICS:
             'id': index + 1,
             'question': question_text.strip(),
             'answer': answer_text.strip(),
-            'original_id': row['id'] if 'id' in row else index + 1
         }
     
     new_df.to_csv(output_file, index=False, lineterminator='\n')
-
 # Usage
-process_questions('cert_questions.csv', 'reformatted_cert_questions.csv')
+import argparse
+parser = argparse.ArgumentParser(description='Process questions from a CSV file.')
+parser.add_argument('input_file', help='Path to the input CSV file')
+args = parser.parse_args()
+input_file = args.input_file
+process_questions(input_file, 'reformatted_cert_questions.csv')

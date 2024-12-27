@@ -8,12 +8,15 @@ with source as (
           '[FOR LLM : context] \n',
           'I have a list of questions to help prepare for dbt certification exam.\n',
           'this list is currently unformatted and in a dirty format',
-          'as in unformatted text, include irrelevant or confusing words to the question context\n',
+          'as in unformatted text, questions and available choices and answers all in one place, and might',
+          'include irrelevant or confusing words to the question context\n',
           'also there might be unverified answers in the list that is untrue to dbt documentation.\n',          
           
           '[FOR LLM : your task] \n',
           
           '1. wrangle the data and format it in a way that is easy to read and understand.\n',
+          'parse out what is the question, the available multiple choice answers, and the correct answer and explanation.\n',
+          'note that there might be some I forgot to put in the correct answer, in such case please infer from the explanation context.\n'
           'for example, '
           'If the available multiple choice answers are numeric (1, 2, 3, 4, 5), replace them with corresponding alphabetical labels (A = 1, B = 2, etc.). \n',
           'ensure the multiple choice answers (selections) will follow this format with clear readable newline :\n',
@@ -26,27 +29,26 @@ with source as (
           'Refer to the following dbt documentation for verification:\n',
             'https://docs.getdbt.com/reference/references-overview \n',
             'https://docs.getdbt.com/guides \n',
+            'and your general knowledge of dbt comamnds and syntax.\n',
           '4. add comma separated tags of some general topics  the question is relevant to to help consume the question easier.\n',
-          '5. evaluate the question and answer to determine what level of difficulty the question is: fundamental or advanced.\n',
+          '5. evaluate the question and answer to determine what level of difficulty the question is: fundamental or advanced. return all lowercase\n',
 
           '[FOR LLM : output format] \n',
           'structured output as JSON with the following keys.\n',
           'do not wrap your answer in literal json ```json ``` code block syntax. I will parse json myself.\n',
+          'the value should be plain text and not nested json object. do include the original newlines if present or added to increase readability.\n',
           '"question"\n',
-          '"selections" - what are the multiple choice options. the value should be plain text and not nested json object.\n',
+          '"selections" - what are the multiple choice options.\n',
           '"answer" - the correct choice(s)\n,' ,
-          '"explanation" parsed from input. Do include relevant ref urls if exist\n',
+          '"explanation" also parsed from input. Do include relevant ref urls if exist\n',
           '"topics" your task instruction at 4. \n',
           '"flags" your task instruction at 3.\n',
           '"difficulty" your task instruction at 5.\n',
 
           '[FOR LLM : Input:] \n',
-          'question:', question, 
-          '\n selections: ', selections,
-          '\n answer: ',answer, 
-          '\n explanation', answer
+          question
         ) AS prompt
-  FROM `ken_dbt.dbt_cert`),
+  FROM `joon-sandbox.ken_dbt.dbt_cert_raw`),
       STRUCT(
         0.8 AS temperature,
         TRUE AS flatten_json_output,
