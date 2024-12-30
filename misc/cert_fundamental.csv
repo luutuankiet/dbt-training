@@ -1,5 +1,5 @@
 id,question,answer
-1,"A data engineer is tasked with creating a YAML file for a new analysis in a dbt project. They need to ensure that the analysis includes specific columns with appropriate metadata, such as descriptions and data types, while adhering to the correct YAML structure. What are the essential components that must be included in the YAML file for the analysis to be valid, according to dbt's YAML structure?
+1,"A data engineer is tasked with creating a YAML file for a new analysis in a dbt project. They need to ensure that the analysis includes specific columns with appropriate metadata, such as descriptions and data types, while adhering to the correct YAML structure. What are the essential components that must be included in the YAML file for the analysis to be valid, according to dbt YAML structure?
 ================================================
 ANSWERS
 A) The version number, analysis name, and a list of columns with names, descriptions, and data types, but the data types can be inferred from the data and do not need to be explicitly specified

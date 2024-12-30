@@ -1,5 +1,5 @@
 question,selections,answer,explanation,topics,flags,difficulty
-"A data engineer is tasked with creating a YAML file for a new analysis in a dbt project. They need to ensure that the analysis includes specific columns with appropriate metadata, such as descriptions and data types, while adhering to the correct YAML structure. What are the essential components that must be included in the YAML file for the analysis to be valid, according to dbt's YAML structure?","A) The version number, analysis name, and a list of columns with names, descriptions, and data types, but the data types can be inferred from the data and do not need to be explicitly specified
+"A data engineer is tasked with creating a YAML file for a new analysis in a dbt project. They need to ensure that the analysis includes specific columns with appropriate metadata, such as descriptions and data types, while adhering to the correct YAML structure. What are the essential components that must be included in the YAML file for the analysis to be valid, according to dbt YAML structure?","A) The version number, analysis name, and a list of columns with names, descriptions, and data types, but the data types can be inferred from the data and do not need to be explicitly specified
 B) The version number, analysis name, and a list of columns with their names, descriptions, and data types
 C) The version number, analysis name, and a list of columns with names and descriptions only, as the data types can be automatically determined by dbt during the analysis process
 D) The version number, analysis name, and a list of columns with names only, as the descriptions and data types are not necessary for the analysis to function
@@ -681,3 +681,11 @@ C) Add a line under `favorite_number` that specifies `tests: - warn_if_odd: seve
 D) Add a line under `favorite_number` that specifies `tests: - warn_if_odd: severity: warn` to explicitly set the severity level.",B,"To apply the `warn_if_odd` test to the `favorite_number` column while maintaining the default severity level, the analyst should simply include `tests: - warn_if_odd` in the `models/.yml` file. This approach utilizes the default configuration set in the generic test definition, which is 'warn'. The second option incorrectly suggests explicitly setting the severity level, which is unnecessary. The third option incorrectly changes the severity level to 'info', which is not the intended behavior. The fourth option overrides the default severity level to 'error', which is not what the analyst wants. 
 
 ## Reference: https://docs.getdbt.com/best-practices/writing-custom-generic-tests","dbt tests, generic tests, severity level, models, yaml",,fundamental
+"When configuring threads in dbt Cloud, what is the default number of threads if not specified?","A) 1
+B) 2
+C) 4
+D) 8",C,"By default, dbt uses 4 threads for model execution if not otherwise specified. This setting allows for parallel execution of models, improving performance without overwhelming the data warehouse. Reference: https://docs.getdbt.com/docs/running-a-dbt-project/using-threads, https://docs.getdbt.com/docs/dbt-versions/2022-release-notes","dbt Cloud, threads, default settings",,fundamental
+What is a key advantage of parallel execution in dbt?,"A) Models can run faster by leveraging multiple threads
+B) Dependencies are ignored, leading to faster results
+C) Models execute in sequence, reducing errors
+D) Parallel execution automatically resolves dependency errors",A,"Parallel execution in dbt leverages multiple threads to process independent models simultaneously, improving performance and reducing runtime. Reference: https://docs.getdbt.com/docs/running-a-dbt-project/using-threads","parallel execution, performance optimization",,fundamental
