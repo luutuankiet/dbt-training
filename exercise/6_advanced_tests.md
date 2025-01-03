@@ -37,7 +37,7 @@ In your current dbt project, various data tests are defined, but there is a need
 
 2. **Create a generic test : Positive Value Test**:
    - We want to create a custom test that confirms our assumption that `supplies.supply_cost` should only contain positive values.
-   - Create a new test file, e.g., `tests/positive_value.sql` with the content below.
+   - Create a new test file, e.g., `tests/generic/positive_value.sql` with the content below.
    - Apply the Positive Value Test to `supplies.sql` model YAML configuration.
 
 ```sql
