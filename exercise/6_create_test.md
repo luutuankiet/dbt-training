@@ -1,4 +1,4 @@
-### Exercise 2: Singular, Generic Tests and Unit Tests
+### Exercise : Singular, Generic Tests and Unit Tests
 
 **Objective**: Develop custom generic tests to validate that a column in a model contains only positive values and create unit tests for specific models. Additionally, implement an `expression_is_true` test in `customers.yml`. This exercise will help you practice creating and applying custom tests and unit tests within your dbt project.
 

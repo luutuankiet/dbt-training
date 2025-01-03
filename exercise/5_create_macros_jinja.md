@@ -1,4 +1,4 @@
-### Exercise 1: Creating a Macro for Currency Conversion
+### Exercise : Creating a Macro for Currency Conversion
 
 Objective: Develop a macro that converts a specified column from cents to dollars. This exercise will help you practice creating reusable macros and applying them within your dbt models.
 
