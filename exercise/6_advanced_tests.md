@@ -89,7 +89,7 @@ models:
 
 ```
 
-4. **Create Unit Tests for `order_items.yml` and `orders.yml`**:
+4. **Create Unit Tests for `stg_locations.yml`, `order_items.yml`,  `orders.yml` **:
    - Define unit tests to ensure that specific logic in your models is working as expected.
    - **Hints**:
      - Create a unit test configuration in the model's YAML file.
@@ -97,7 +97,54 @@ models:
      - Specify `given` and `expect` sections to outline input data and expected results.
      - Use the following structure as a guide, but fill in the critical parts:
 
-4.1 **test_supply_costs_sum_correctly**
+4.1. **test_does_location_opened_at_trunc_to_date**
+
+- **What**:
+
+  - Checks that the `stg_locations` model correctly truncates the `opened_at` timestamp to a date.
+  - In the provided code snippet, the `given` mock data has been provided. **Please fill in the FILL_ME in `expect` section.**
+
+- **Why**:
+
+  - This ensures that the `opened_at` field is properly converted to a date format, which is crucial for date-based analytics and reporting.
+
+```yaml
+# models/staging/stg_locations.yml
+
+models:
+  - name: stg_locations
+
+# ---- snip ----
+
+# note that unit_test block is on the same level as the model.
+unit_tests:
+  - name: test_does_location_opened_at_trunc_to_date
+    description: "Check that opened_at timestamp is properly truncated to a date."
+    model: stg_locations
+    given:
+      # note that the mock data can be arbitrary that don't need to exist in the models;
+      # what we are testing is the LOGIC in the model.
+      - input: source('ecom', 'raw_stores')
+        rows:
+          - { id: 1, name: "Vice City", tax_rate: 0.2, opened_at: "2016-09-01T00:00:00" } # Mock data for first store
+          - { id: 2, name: "San Andreas", tax_rate: 0.1, opened_at: "2079-10-27T23:59:59.9999" } # Mock data for second store
+
+    expect:
+      rows:
+        - { location_id: FILL_ME, location_name: FILL_ME, tax_rate: FILL_ME, opened_date: FILL_ME } # Expected result for first store
+        - { location_id: FILL_ME, location_name: FILL_ME, tax_rate: FILL_ME, opened_date: FILL_ME } # Expected result for second store
+```
+
+- Consolidated info to help generate the above unit test:
+| Model             | Column          | Source/Calculation                                   |
+| ----------------- | --------------- | ---------------------------------------------------- |
+| **stg_locations** | `location_id`   | Derived from `raw_stores.id`                         |
+|                   | `location_name` | Derived from `raw_stores.name`                       |
+|                   | `tax_rate`      | Directly from `raw_stores.tax_rate`                  |
+|                   | `opened_date`   | Truncated from `raw_stores.opened_at` to date format |
+
+
+4.2. **test_supply_costs_sum_correctly**
 
 - **What**
   - verifies that the `order_items` model correctly calculates the total supply cost for each order.
@@ -141,17 +188,17 @@ unit_tests:
 
 - Consolidated info to help generate the above unit test:
 
-| Model                     | Column          | Source/Calculation                                                                             |
-| ------------------------- | --------------- | ---------------------------------------------------------------------------------------------- |
-| **stg_supplies**    | `product_id`  | Directly from `stg_supplies`                                                                 |
-|                           | `supply_cost` | Directly from `stg_supplies`                                                                 |
-| **stg_order_items** | `order_id`    | Directly from `stg_order_items`                                                              |
-|                           | `product_id`  | Directly from `stg_order_items`                                                              |
-| **order_items**     | `order_id`    | Derived from `stg_order_items.order_id`                                                      |
-|                           | `product_id`  | Derived from `stg_order_items.product_id` and `stg_supplies.product_id`                    |
-|                           | `supply_cost` | Calculated as `sum(supply_cost)` from `stg_supplies.supply_cost` grouped by `product_id` |
+| Model               | Column        | Source/Calculation                                                                       |
+| ------------------- | ------------- | ---------------------------------------------------------------------------------------- |
+| **stg_supplies**    | `product_id`  | Directly from `stg_supplies`                                                             |
+|                     | `supply_cost` | Directly from `stg_supplies`                                                             |
+| **stg_order_items** | `order_id`    | Directly from `stg_order_items`                                                          |
+|                     | `product_id`  | Directly from `stg_order_items`                                                          |
+| **order_items**     | `order_id`    | Derived from `stg_order_items.order_id`                                                  |
+|                     | `product_id`  | Derived from `stg_order_items.product_id` and `stg_supplies.product_id`                  |
+|                     | `supply_cost` | Calculated as `sum(supply_cost)` from `stg_supplies.supply_cost` grouped by `product_id` |
 
-4.2. **test_order_items_compute_to_bools_correctly**
+4.3. **test_order_items_compute_to_bools_correctly**
 
 - **What**:
   - Checks that the `orders` model correctly **count** the boolean value of upstream food and drink items.
@@ -195,18 +242,19 @@ unit_tests:
 
 - Consolidated info to help generate the above unit test:
 
-| Model                 | Column                | Source/Calculation                                                     |
-| --------------------- | --------------------- | ---------------------------------------------------------------------- |
-| **order_items** | `order_id`          | Directly from `order_items`                                          |
-|                       | `order_item_id`     | Directly from `order_items`                                          |
-|                       | `is_drink_item`     | Directly from `order_items`                                          |
-|                       | `is_food_item`      | Directly from `order_items`                                          |
-| **stg_orders**  | `order_id`          | Directly from `stg_orders`                                           |
+| Model           | Column              | Source/Calculation                                                 |
+| --------------- | ------------------- | ------------------------------------------------------------------ |
+| **order_items** | `order_id`          | Directly from `order_items`                                        |
+|                 | `order_item_id`     | Directly from `order_items`                                        |
+|                 | `is_drink_item`     | Directly from `order_items`                                        |
+|                 | `is_food_item`      | Directly from `order_items`                                        |
+| **stg_orders**  | `order_id`          | Directly from `stg_orders`                                         |
 | **orders**      | `order_id`          | Derived from `stg_orders.order_id` and `order_items.order_id`      |
-|                       | `count_food_items`  | Calculated as count of `order_items` where `is_food_item` is true  |
-|                       | `count_drink_items` | Calculated as count of `order_items` where `is_drink_item` is true |
-|                       | `is_food_order`     | Derived as true if `count_food_items` > 0                            |
-|                       | `is_drink_order`    | Derived as true if `count_drink_items` > 0                           |
+|                 | `count_food_items`  | Calculated as count of `order_items` where `is_food_item` is true  |
+|                 | `count_drink_items` | Calculated as count of `order_items` where `is_drink_item` is true |
+|                 | `is_food_order`     | Derived as true if `count_food_items` > 0                          |
+|                 | `is_drink_order`    | Derived as true if `count_drink_items` > 0                         |
+
 
 #### Expected Outcome:
 
@@ -215,5 +263,5 @@ unit_tests:
   - **generic test**
     - for positive values in `supplies.supply_cost`
     - `expression_is_true` test in `customers.yml`.
-  - **unit tests** for `order_items.yml` and `orders.yml`
+  - **unit tests** for `order_items.yml` , `orders.yml` and `stg_locations.yml`
 - These tests will enhance your project's data quality assurance processes by ensuring data integrity and logical correctness.

@@ -41,10 +41,27 @@ from invalid_orders
              expression: "lifetime_spend_pretax + lifetime_tax_paid = lifetime_spend"
 ```
 
-# 4. **unit tests** for `order_items.yml` and `orders.yml`
+# 4. **unit tests** for `stg_locations.yml`, `order_items.yml` , `orders.yml`
 
 ```yaml
- #  models/marts/order_items.yml
+  # models/staging/stg_locations.yml
+  unit_tests:
+    - name: test_does_location_opened_at_trunc_to_date
+      description: "Check that opened_at timestamp is properly truncated to a date."
+      model: stg_locations
+      given:
+        # note that the mock data can be arbitrary that don't need to exist in the models;
+        # what we are testing is the LOGIC in the model.
+        - input: source('ecom', 'raw_stores') # Reference the source for raw stores
+          rows:
+            - { id: 1, name: "Vice City", tax_rate: 0.2, opened_at: "2016-09-01T00:00:00" } # Mock data for first store
+            - { id: 2, name: "San Andreas", tax_rate: 0.1, opened_at: "2079-10-27T23:59:59.9999" } # Mock data for second store
+
+      expect:
+        rows:
+          - { location_id: 1, location_name: "Vice City", tax_rate: 0.2, opened_date: "2016-09-01" } # Expected result for first store
+          - { location_id: 2, location_name: "San Andreas", tax_rate: 0.1, opened_date: "2079-10-27" } # Expected result for second store
+#  models/marts/order_items.yml
    unit_tests:
      - name: test_supply_costs_sum_correctly
        description: "Test that supply costs sum correctly for each order."
@@ -86,4 +103,7 @@ from invalid_orders
          rows:
            - { order_id: 1, count_food_items: 1, count_drink_items: 1, is_drink_order: true, is_food_order: true }
            - { order_id: 2, count_food_items: 1, count_drink_items: 0, is_drink_order: false, is_food_order: true }
+
+
 ```
+

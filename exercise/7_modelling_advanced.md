@@ -13,7 +13,7 @@
 - Verify that there's a file `original_raw_customers.csv` `simulate_raw_customers.csv` in the `seeds` folder.
 - Use the `dbt seed` command to load the seed data into your database, after which you can refer in your snapshot as `{{ref('simulate_raw_customers')}}`.
 
-1. **Create a Snapshot Configuration**:
+2. **Create a Snapshot Configuration**:
    - Define a new snapshot configuration file, e.g., `snapshots/snp_raw_customers.sql`.
    - Use the `snapshot` macro to define the snapshot logic.
 
@@ -36,7 +36,7 @@
    {% endsnapshot %}
 ```
 
-2. **Implement Timestamp Strategy**:
+3. **Implement Timestamp Strategy**:
    - Modify the snapshot configuration to use a timestamp strategy.
 
 ```sql
@@ -57,19 +57,19 @@
    {% endsnapshot %}
 ```
 
-3. **Run the Snapshot**:
+4. **Run the Snapshot**:
 
    - Execute the snapshot using the dbt cloud IDE console :
 
    `dbt snapshot`
 
-4. **Simulate Data Changes**:
+5. **Simulate Data Changes**:
 
    - Our ref model `simulate_raw_customers` includes some changes to the original data. 
    - To simulate the change, update the snapshot sql files's `ref` function to use the `simulate_raw_customers` model.
    - Re-run the snapshot to capture the changes : `dbt snapshot`
 
-5. **Review Snapshot Results**:
+6. **Review Snapshot Results**:
 
    - Check the snapshot tables to ensure that changes are captured correctly : can you identify in which dataset did dbt build the snapshots ? 
 
@@ -125,7 +125,7 @@ Incremental models in dbt allow you to process only new or updated records, impr
    `dbt run --select orders`
    - Observe the compiled dbt code - can you spot the difference between incremental model and table model ?
 
-5. **Optimize Further**:
+4. **Optimize Further**:
 
    - Consider additional optimizations, such as indexing or partitioning, to further improve performance.
    - Further reading here : 

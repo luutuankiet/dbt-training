@@ -25,7 +25,7 @@ In your dbt project, seeds are used to load static data from CSV files into your
 
    `dbt seed`
 
-2. **Create a Model to Join Seed Data**:
+3. **Create a Model to Join Seed Data**:
    - Create a new dbt model that joins the `stg_location` data with the `store_region_mapping` seed to enrich the store data.
    - hint: you can use the `left join` clause to join the two tables. The code below drafts the outline for what to do : 
 ```sql
@@ -46,12 +46,12 @@ In your dbt project, seeds are used to load static data from CSV files into your
    on locations.id = region_mapping.store_id
 ```
 
-1. **Run the Model**:
+4. **Run the Model**:
    - Execute the model to create the enriched store data.
 
    `dbt run --select enriched_locations`
 
-2. **Bonus : integrate the enriched logic directly into stg_locations**:
+5. **Bonus : integrate the enriched logic directly into stg_locations**:
    - So far our approach is to join the mapping data in a new model, `enriched_location`. This is for user testing purposes so that they can verify the mapping is as expected.
    - Imagine after some time they signed off on the mapping data. Naturally we'd want to integrate this logic into the `stg_locations` model.
    - Modify the `stg_locations` model to directly join the seed data using a CTE.
