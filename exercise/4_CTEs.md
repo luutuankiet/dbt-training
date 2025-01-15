@@ -11,13 +11,13 @@ Learn how to use Common Table Expressions (CTEs) to organize and simplify comple
    - This file will contain the SQL logic to transform and summarize order data.
 
 2. **Define the Source:**
-   - Use the `source()` function to select data from the `raw_orders` and `raw_order_items` sources.
-   - Create a CTE named `orders` to pull data from the `raw_orders` table.
-   - Create another CTE named `order_items` to pull data from the `raw_items` table.
+   - Use the `ref()` function to select data from the `stg_orders` and `stg_order_items` models.
+   - Create a CTE named `stg_orders` to pull data from the `stg_orders` model.
+   - Create another CTE named `stg_order_items` to pull data from the `stg_order_items` model.
 
 3. **Create a CTE for Data Transformation:**
-   - Join the `orders` and `order_items` CTEs on `order_id`.
-   - Calculate the total order value by summing the product of `quantity` and `price` for each item.
+   - Join the `stg_orders` and `stg_order_items` CTEs on `order_id`.
+   - Calculate the total values in cents for `subtotal`, `tax_paid`, and `order_total` for each order.
    - Group the results by `order_id`, `customer_id`, and `ordered_at`.
 
    ### Hints for Aggregations
@@ -36,7 +36,7 @@ Learn how to use Common Table Expressions (CTEs) to organize and simplify comple
        ```
 
 4. **Create Additional CTEs for Aggregation:**
-   - Aggregate the data by `customer_id` to calculate the total number of orders and the total order value for each customer.
+   - Aggregate the data by `customer_id` to calculate the total number of orders and the total values in cents for each customer.
    - Use the `order_details` CTE as the source for this aggregation.
 
    ### More Hints for Aggregations
