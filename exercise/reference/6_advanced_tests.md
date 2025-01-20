@@ -2,16 +2,11 @@
 ```sql
 
 -- tests/order_total_greater_than_subtotal.sql
-with invalid_orders as (
     select 
     -- the columns you want to show in the test result
     order_id, order_total, subtotal
     from {{ ref('orders') }}
     where order_total < subtotal
-)
-
-select count(*) as invalid_count
-from invalid_orders
 
 ```
 
