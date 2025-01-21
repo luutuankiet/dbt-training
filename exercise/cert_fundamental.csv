@@ -174,22 +174,6 @@ A
 The correct method to set the materialization strategy for the model in the Python code is to call dbt.config(materialized='table') at the beginning of the model function. This ensures that the model is materialized as a table when it is built. Setting the materialization only in the YAML configuration file would not apply to the Python model unless explicitly referenced. Using a conditional statement is unnecessary for this task, as the materialization can be directly set. The statement that materialization cannot be set in Python models is incorrect, as it can be configured using dbt.config(). 
 
 ## Reference: https://docs.getdbt.com/docs/build/python-models"
-10,"Where should you store general-purpose models generated from macros or seeds?
-================================================
-ANSWERS
-A) In the staging folder
-
-B) In the utilities folder
-
-C) In the models folder
-
-D) In the base folder
-================================================
-TOPICS:
-dbt project structure, models, macros, seeds","================================================
-B
-================================================
-In the utilities folder. General-purpose models should be stored in the models/utilities directory. Reference:https://docs.getdbt.com/best-practices/how-we-structure/2-staging"
 11,"How does dbt handle model materialization?
 ================================================
 ANSWERS
