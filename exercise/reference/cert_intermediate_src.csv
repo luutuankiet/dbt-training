@@ -1,0 +1,51 @@
+question,selections,answer,explanation,topics,flags,difficulty
+What is a key benefit of using dbt model contracts?,"A) Contracts automatically optimize query performance
+B) Contracts enforce schema validation during model builds
+C) Contracts allow for dynamic schema changes during runtime
+D) Contracts are primarily used for access control",B,"dbt model contracts enforce schema validation during model builds, ensuring the output adheres to predefined expectations. This improves governance, quality, and collaboration. Reference: https://docs.getdbt.com/docs/collaborate/govern/model-contracts","model contracts, schema validation, governance",,intermediate
+Which of the following is a requirement when defining a model contract in dbt?,"A) The model must include explicit column definitions with data types
+B) The model must define relationships between tables
+C) The model must specify incremental materialization
+D) The model must include a unique key",A,"Model contracts require explicit column definitions, including names and data types, to enforce schema validation during execution. Reference: https://docs.getdbt.com/docs/collaborate/govern/model-contracts","model contracts, column definitions, schema enforcement",,intermediate
+What is the main difference between deferring and cloning in dbt?,"A) Deferring reuses existing models in production, while cloning creates physical copies
+B) Deferring creates new models, while cloning reuses cached results
+C) Deferring skips dependency checks, while cloning enforces them
+D) Deferring is faster than cloning because it avoids database queries",A,"Deferring reuses existing models in a production environment without re-building them, improving efficiency in development. Cloning creates physical copies of models, useful for isolated testing or staging environments. Reference: https://docs.getdbt.com/blog/to-defer-or-to-clone","defer, clone, performance optimization",,intermediate
+When should you use the 'defer' feature in dbt?,"A) During development to reference production artifacts and avoid re-running models
+B) When migrating models to a new database environment
+C) For incremental models that require historical data
+D) To ensure models are rebuilt in every dbt run",A,"The 'defer' feature is used during development to reference existing production artifacts, saving time by avoiding the need to rebuild unchanged models. Reference: https://docs.getdbt.com/blog/to-defer-or-to-clone","defer, development optimization",,intermediate
+What happens if a model fails during a dbt run with parallel execution?,"A) All models stop executing immediately
+B) Dependent models are skipped, but independent models continue
+C) Only the failed model is retried automatically
+D) All models continue running, ignoring the failure",B,"When a model fails, dependent models are skipped, but independent models continue execution. This minimizes disruption and maximizes parallel processing efficiency. Reference: https://docs.getdbt.com/docs/running-a-dbt-project/using-threads","parallel execution, failure handling, dbt run",,intermediate
+What is the primary use case for 'clone' in dbt?,"A) To duplicate a dataset for isolated testing or debugging
+B) To reuse existing models without duplicating storage
+C) To optimize performance by avoiding database queries
+D) To automatically resolve dependency errors",A,"Cloning is primarily used to create isolated copies of datasets for testing, debugging, or QA environments without affecting production data. Reference: https://docs.getdbt.com/blog/to-defer-or-to-clone","clone, testing, debugging, isolation",,intermediate
+What is the primary purpose of using model contracts in dbt?,"A) To enforce data quality by specifying expected schemas for models
+B) To manage database transactions during model execution
+C) To define relationships between different models
+D) To control user access to specific models",A,"Model contracts in dbt are used to enforce data quality by specifying the expected schema for a model, including the presence and types of columns. This ensures that the model's output aligns with predefined expectations, facilitating better governance and collaboration. Reference: https://docs.getdbt.com/docs/collaborate/govern/model-contracts","model contracts, data quality, schema enforcement",,intermediate
+How can you configure the number of threads for a dbt Cloud environment?,"A) By setting the 'threads' parameter in the dbt_project.yml file
+B) By adjusting the 'max_threads' setting in the database configuration
+C) By specifying the number of threads in the environment's extended attributes
+D) By modifying the 'threads' setting in the profiles.yml file",C,"In dbt Cloud, you can configure the number of threads by specifying it in the environment's extended attributes. This allows for customization of parallelism in model execution to suit the project's needs. Reference: https://docs.getdbt.com/docs/dbt-cloud-environments","dbt Cloud, threads, configuration",,intermediate
+What is the effect of using the '--fail-fast' flag during a dbt run?,"A) It allows all models to run to completion, regardless of failures
+B) It stops the execution immediately when the first model fails
+C) It retries failed models up to three times before stopping
+D) It logs errors but continues executing all models",B,The '--fail-fast' flag in dbt causes the execution to stop immediately when the first model fails. This is useful in continuous integration scenarios where an immediate stop upon failure is desired to prevent further processing. Reference: https://docs.getdbt.com/docs/running-a-dbt-project/using-threads,"dbt run, fail-fast, execution flags",,intermediate
+"In a dbt run with the following diagram.
+
+model_a --> model_b --> model_c
+         ↘           
+           model_f --> model_g
+
+model_d --> model_e
+         ↘
+           model_h --> model_i
+
+What happens if `model_b`, `model_d` fails during execution?","A) All running models stop executing
+B) model_b, model_d and its dependent stops executing
+C) Model_f continues, but model_c is skipped; model_d and model_e stop
+D) All models continue executing regardless of the failure",B,"If model_a fails during execution, its dependent models, are skipped. Independent models, such as model_f and model_g, continue executing. This behavior ensures that only models dependent on failed models are affected. Reference: https://docs.getdbt.com/docs/running-a-dbt-project/using-threads","dbt run, parallel execution, failure handling",,intermediate
