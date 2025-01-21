@@ -1,11 +1,11 @@
 -- models/staging/enriched_stores.sql
 with locations as (
     select *
-    from { { ref('stg_locations') } }
+    from {{ ref('stg_locations') }}
 ),
 region_mapping as (
     select *
-    from { { ref('store_region_mapping') } }
+    from {{ ref('store_region_mapping') }}
 ),
 final as (
     select locations.*,
