@@ -1,13 +1,11 @@
+{{ config(materialized = 'view') }}
+
 with
-
 source as (
-
     select * from {{ source('ecom', 'raw_items') }}
-
 ),
 
 renamed as (
-
     select
 
         ----------  ids

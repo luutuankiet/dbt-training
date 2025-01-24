@@ -1,0 +1,48 @@
+question,selections,answer,explanation,topics,flags,difficulty
+You are tasked with implementing row-level security in a Snowflake database to restrict access to sensitive data for specific users. You need to ensure that only authorized users can view certain rows based on their roles. What is the best practice for applying row access policies in Snowflake?,"A) Implement a global privilege that allows all users to access the data
+B) Utilize a post-hook to apply a row access policy to the table
+C) Use a column masking policy to hide sensitive data from all users
+D) Create a dynamic view function to filter rows based on user roles",B,"The correct method to apply row access policies in Snowflake is to utilize a post-hook, which allows you to enforce security measures on the table after it has been created. The other options either do not apply to row-level security in Snowflake or are incorrect methods for achieving the desired outcome.","snowflake, row level security, data security",,advanced
+"Is Slim CI a default feature in dbt, or does it require additional configuration?","A) It's a default feature in all dbt projects
+B) It requires additional configuration
+C) It's only available in dbt Cloud
+D) It's not a feature of dbt but of external CI tools",B,Slim CI is not a default feature and requires additional configuration to smartly run CI builds for only updated models and their downstream dependencies. Reference: https://courses.getdbt.com/courses/take/advanced-deployment/texts/39437556-review,"ci,slim ci",,advanced
+"During a dbt project, a data engineer realizes that their final model is not producing the expected results. They suspect that the transformations in their Common Table Expressions (CTEs) may not be correctly implemented and want to audit their results to identify discrepancies. Which tool should the engineer use to efficiently audit their results and compare the original query results to the refactored results?","A) Use dbt documentation for troubleshooting model issues.
+B) Use the dbt audit_helper package to generate comparison queries automatically.
+C) Write custom SQL queries to manually compare the results.
+D) Consult with team members to review the SQL code together.
+E) Use a third-party data visualization tool to analyze discrepancies.",B,"This answer is correct. B
+
+The most effective tool for auditing results is the dbt audit_helper package, which automatically generates comparison queries to identify discrepancies between the original and refactored results. Writing custom SQL queries can be time-consuming and prone to error, while relying solely on documentation may not provide the necessary insights. Consulting with team members can be helpful, but using the audit_helper package streamlines the process and provides a systematic approach to auditing. 
+
+## Reference: https://docs.getdbt.com/guides/refactoring-legacy-sql","testing, debugging, refactoring, cte, sql",,advanced
+What is the purpose of dbt groups in a DAG?,"A) To restrict access to private models
+B) To organize models in folders
+C) To define model dependencies
+D) To schedule model runs",A,"A group is a collection of nodes within a dbt DAG. Groups are named, and every group has an owner. They enable intentional collaboration within and across teams by restricting access to private models. Reference: https://docs.getdbt.com/docs/build/groups","dag, groups, access control, collaboration",,advanced
+What does the generate_alias_name macro accept as arguments?,"A) Node and node version
+B) Model name and alias name
+C) Model config and node name
+D) Custom alias and node name",D,"The generate_alias_name macro accepts the custom alias supplied in the model config and the node for which it's generated.
+Reference: https://docs.getdbt.com/docs/build/custom-aliases","macros, configurations, aliases",,advanced
+"You are working on a dbt project where you have multiple versions of a model, specifically `dim_customers`. The first version, `v1`, is materialized as a view, while the second version, `v2`, is materialized as a table. You need to ensure that the first version continues to populate the existing database table named `dim_customers`, which is crucial for several dashboards that rely on this data. How can you configure the `dim_customers` model to maintain its original database location while allowing for versioning in dbt?","A) Change the materialization of `v1` to a table to match `v2` and avoid confusion.
+B) Set the `alias` configuration in the YAML file for `v1` to `dim_customers` to keep it in its original location.
+C) Create a new model that duplicates `dim_customers` and set its materialization to view, which would not solve the issue of maintaining the original table's functionality.
+D) Remove the versioning from the model, which would simplify the configuration but eliminate the benefits of having multiple versions.",B,"To maintain the original database location for `dim_customers`, you should set the `alias` configuration in the YAML file for `v1` to `dim_customers`. This ensures that the first version continues to populate the existing table. Changing the materialization of `v1` to a table would not address the need to keep the original table name. Removing versioning would eliminate the benefits of having multiple versions, and creating a duplicate model would not solve the issue of maintaining the original table's functionality. 
+
+## Reference: https://docs.getdbt.com/docs/collaborate/govern/model-versions","model configuration, versioning, aliases, yaml",,advanced
+What is the function of the dispatch configuration in dbt_project.yml?,"A) To schedule dbt runs
+B) To specify macro namespaces and their search order
+C) To dispatch reports
+D) To deploy models to different databases",B,"The dispatch configuration is used to specify macro namespaces and their search order.
+Reference: https://docs.getdbt.com/reference/dbt_project.yml","dbt_project.yml, dispatch, macro, namespace",,advanced
+When might you consider using materialized views instead of incremental models in dbt?,"A) For any use case
+B) For simple models
+C) When dealing with BigQuery
+D) When you need to manage incremental logic",C,"Materialized views are a suitable choice when incremental models are sufficient, but you want the data platform to manage the incremental logic and refresh. Reference: https://docs.getdbt.com/docs/build/materializations","materialized views, incremental models, BigQuery",,advanced
+"A data analyst is working on a dbt project that includes multiple models, and they need to ensure that all models are materialized correctly in the database. They notice that the `dim_customers` model is set to materialize as a table, but they want to confirm that this setting is applied consistently across all versions of the model, which refers to different branches and historical versions in the project. How can the analyst ensure that the materialization setting is consistent for all versions of the `dim_customers` model?","A) Use a macro to dynamically set the materialization type for all models in the project.
+B) Manually check each model file to ensure the materialization setting is correct for each version to ensure that the materialization setting is correct for each version.
+C) Set the `materialized` property globally in the `dbt_project.yml` file to apply it to all models automatically in the project.
+D) Verify that each version in the `schema.yml` file has the `materialized: table` setting specified under its configuration.",D,"To ensure that the materialization setting is consistent for all versions of the `dim_customers` model, the analyst should verify that each version in the `schema.yml` file has the `materialized: table` setting specified under its configuration. This guarantees that each version is explicitly defined with the desired materialization type. Setting the property globally in the `dbt_project.yml` file is not applicable for version-specific settings. Manually checking each model file is less efficient, and using a macro may complicate the configuration unnecessarily. 
+
+## Reference: https://docs.getdbt.com/docs/collaborate/govern/model-versions","model configuration, schema.yml, materialization, model versions",,advanced
