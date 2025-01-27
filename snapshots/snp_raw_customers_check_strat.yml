@@ -1,0 +1,11 @@
+snapshots:
+  - name: snp_raw_customers_check_strat
+    relation: ref('simulate_raw_customers_check')
+    # relation: ref('original_raw_customers_check')
+    config:
+      schema: snapshots
+      unique_key: id
+      strategy: check
+      check_cols: all
+      # check_cols: ['name', 'id']
+      hard_deletes: invalidate
