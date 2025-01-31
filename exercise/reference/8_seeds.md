@@ -36,7 +36,7 @@ with
         select * from {{ ref("store_region_mapping") }}
         ),
 
-    enrich_locations as (
+    enriched_locations as (
         select
             source.*,
             region_mapping.region,
@@ -44,7 +44,7 @@ with
             region_mapping.manager_email
         from source
         left join region_mapping on source.id = region_mapping.store_id
-    )
+    ),
 
     renamed as (
 
