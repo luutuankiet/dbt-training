@@ -1,4 +1,12 @@
 exposures:
+  - name: customer_lifetime_value_analysis
+    type: analysis
+    depends_on:
+      - ref('customers')
+    description: "This exposure represents the analysis of customer lifetime value (LTV), which relies on the customers model to provide insights into customer spending patterns and retention."
+    owner:
+      email: "marketing.team@example.com"
+      name: "Marketing Team"
   - name: sales_dashboard
     type: dashboard
     depends_on:
@@ -8,14 +16,6 @@ exposures:
       email: "data.team@example.com"
       name: "Data Team"
 
-  - name: customer_lifetime_value_analysis
-    type: analysis
-    depends_on:
-      - ref('customers')
-    description: "This exposure represents the analysis of customer lifetime value (LTV), which relies on the customers model to provide insights into customer spending patterns and retention."
-    owner:
-      email: "marketing.team@example.com"
-      name: "Marketing Team"
 
   - name: inventory_management_dashboard
     type: dashboard
