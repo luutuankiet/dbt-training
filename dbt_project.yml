@@ -18,6 +18,11 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
+seeds:
+  jaffe_shop:
+    demo_timestamp_raw_customers:
+      +column_types:
+        last_updated: datetime
 
 models:
   jaffle_shop:

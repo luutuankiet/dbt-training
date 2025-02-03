@@ -1,0 +1,15 @@
+snapshots:
+  - name: snp_timestamp_strategy
+    relation: ref('demo_timestamp_raw_customers')
+    config:
+      unique_key: id
+      strategy: timestamp
+      updated_at: last_updated
+  - name: snp_check_strategy
+    relation: ref('demo_check_raw_customers')
+    config:
+      unique_key: id
+      strategy: check
+      check_cols: 
+        - name
+        - membership_level

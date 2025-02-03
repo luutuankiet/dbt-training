@@ -136,6 +136,7 @@ unit_tests:
 ```
 
 - Consolidated info to help generate the above unit test:
+
 | Model             | Column          | Source/Calculation                                   |
 | ----------------- | --------------- | ---------------------------------------------------- |
 | **stg_locations** | `location_id`   | Derived from `raw_stores.id`                         |
