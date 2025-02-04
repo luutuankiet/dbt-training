@@ -1,74 +1,23 @@
 sources:
   - name: ecom
-    database: raw-data-438007
     schema: dbt_training_Y24
+    database: raw-data-438007
+    description: E-commerce data for the Jaffle Shop
     tables:
       - name: raw_customers
-        columns:
-          - name: id
-            data_type: string
-          - name: name
-            data_type: string
-
-      - name: raw_items
-        columns:
-          - name: id
-            data_type: string
-          - name: order_id
-            data_type: string
-          - name: sku
-            data_type: string
-
+        description: One record per person who has purchased one or more items
       - name: raw_orders
-        columns:
-          - name: id
-            data_type: string
-          - name: customer
-            data_type: string
-          - name: ordered_at
-            data_type: timestamp
-          - name: store_id
-            data_type: string
-          - name: subtotal
-            data_type: int64
-          - name: tax_paid
-            data_type: int64
-          - name: order_total
-            data_type: int64
-
-      - name: raw_products
-        columns:
-          - name: sku
-            data_type: string
-          - name: name
-            data_type: string
-          - name: type
-            data_type: string
-          - name: price
-            data_type: int64
-          - name: description
-            data_type: string
-
+        description: One record per order (consisting of one or more order items)
+        loaded_at_field: ordered_at
+      - name: raw_items
+        description: Items included in an order
       - name: raw_stores
-        columns:
-          - name: id
-            data_type: string
-          - name: name
-            data_type: string
-          - name: opened_at
-            data_type: timestamp
-          - name: tax_rate
-            data_type: float64
-
+        loaded_at_field: opened_at
+      - name: raw_products
+        description: One record per SKU for items sold in stores
       - name: raw_supplies
-        columns:
-          - name: id
-            data_type: string
-          - name: name
-            data_type: string
-          - name: cost
-            data_type: int64
-          - name: perishable
-            data_type: boolean
-          - name: sku
-            data_type: string
+        description: One record per supply per SKU of items sold in stores
+    freshness:
+      warn_after:
+        count: 24
+        period: hour
