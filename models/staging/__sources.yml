@@ -19,5 +19,5 @@ sources:
         description: One record per supply per SKU of items sold in stores
     freshness:
       warn_after:
-        count: 24
-        period: hour
+        count: 3000
+        period: day
