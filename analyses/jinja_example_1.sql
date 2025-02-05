@@ -1,0 +1,1 @@
+{{ cents_to_dollars('column_name') }}
