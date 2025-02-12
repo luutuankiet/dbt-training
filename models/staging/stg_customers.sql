@@ -14,7 +14,8 @@ renamed as (
         id as customer_id,
 
         ---------- text
-        name as customer_name
+        name as customer_name,
+        'POS' as customer_source
 
     from source
 
