@@ -1,0 +1,200 @@
+version: 2
+models:
+  - name: stg_customers
+    description: This model stages raw customer data, cleaning and standardizing it for further use.
+    columns:
+      - name: customer_id
+        description: The unique identifier for each customer.
+        config:
+          meta: {}
+          tags: []
+      - name: customer_name
+        description: The full name of the customer.
+        config:
+          meta: {}
+          tags: []
+      - name: customer_source
+        description: The source system from which the customer data originated (e.g., 'POS').
+        config:
+          meta: {}
+          tags: []
+  - name: stg_orders
+    description: This model stages raw order data, cleaning and standardizing it for further use, including currency conversion and date truncation.
+    columns:
+      - name: order_id
+        description: The unique identifier for each order.
+        config:
+          meta: {}
+          tags: []
+      - name: location_id
+        description: The unique identifier for the store location where the order was placed.
+        config:
+          meta: {}
+          tags: []
+      - name: customer_id
+        description: The unique identifier for the customer who placed the order.
+        config:
+          meta: {}
+          tags: []
+      - name: subtotal_cents
+        description: The subtotal of the order in cents, before tax.
+        config:
+          meta: {}
+          tags: []
+      - name: tax_paid_cents
+        description: The amount of tax paid for the order in cents.
+        config:
+          meta: {}
+          tags: []
+      - name: order_total_cents
+        description: The total amount of the order in cents, including tax.
+        config:
+          meta: {}
+          tags: []
+      - name: subtotal
+        description: The subtotal of the order in dollars, before tax.
+        config:
+          meta: {}
+          tags: []
+      - name: tax_paid
+        description: The amount of tax paid for the order in dollars.
+        config:
+          meta: {}
+          tags: []
+      - name: order_total
+        description: The total amount of the order in dollars, including tax.
+        config:
+          meta: {}
+          tags: []
+      - name: ordered_at
+        description: The date and time when the order was placed, truncated to the day.
+        config:
+          meta: {}
+          tags: []
+  - name: stg_order_items
+    description: This model stages raw order item data, cleaning and standardizing it for further use.
+    columns:
+      - name: order_item_id
+        description: The unique identifier for each item within an order.
+        config:
+          meta: {}
+          tags: []
+      - name: order_id
+        description: The unique identifier for the order to which this item belongs.
+        config:
+          meta: {}
+          tags: []
+      - name: product_id
+        description: The unique identifier for the product associated with this order item.
+        config:
+          meta: {}
+          tags: []
+  - name: stg_products
+    description: This model stages raw product data, cleaning and standardizing it for further use.
+    columns:
+      - name: product_id
+        description: The unique identifier for each product.
+        config:
+          meta: {}
+          tags: []
+      - name: product_name
+        description: The name of the product.
+        config:
+          meta: {}
+          tags: []
+      - name: product_type
+        description: The category or type of the product.
+        config:
+          meta: {}
+          tags: []
+      - name: product_description
+        description: A brief description of the product.
+        config:
+          meta: {}
+          tags: []
+      - name: product_price
+        description: The price of the product.
+        config:
+          meta: {}
+          tags: []
+      - name: is_food_item
+        description: Indicates if the product is a food item (TRUE/FALSE).
+        config:
+          meta: {}
+          tags: []
+      - name: is_drink_item
+        description: Indicates if the product is a drink item (TRUE/FALSE).
+        config:
+          meta: {}
+          tags: []
+  - name: stg_supplies
+    description: This model stages raw supply data, cleaning and standardizing it for further use.
+    columns:
+      - name: supply_uuid
+        description: The universally unique identifier for the supply item.
+        config:
+          meta: {}
+          tags: []
+      - name: supply_id
+        description: A unique identifier for the supply.
+        config:
+          meta: {}
+          tags: []
+      - name: product_id
+        description: The unique identifier of the product that uses this supply.
+        config:
+          meta: {}
+          tags: []
+      - name: supply_name
+        description: The name of the supply.
+        config:
+          meta: {}
+          tags: []
+      - name: supply_cost
+        description: The cost of the supply.
+        config:
+          meta: {}
+          tags: []
+      - name: is_perishable_supply
+        description: Indicates if the supply is perishable (TRUE/FALSE).
+        config:
+          meta: {}
+          tags: []
+  - name: stg_locations
+    description: This model stages raw store location data, enriching it with regional information and standardizing column names.
+    columns:
+      - name: location_id
+        description: The unique identifier for each store location.
+        config:
+          meta: {}
+          tags: []
+      - name: location_name
+        description: The name of the store location.
+        config:
+          meta: {}
+          tags: []
+      - name: location_region
+        description: The geographical region where the store is located.
+        config:
+          meta: {}
+          tags: []
+      - name: location_manager_name
+        description: The name of the manager for this location.
+        config:
+          meta: {}
+          tags: []
+      - name: location_manager_email
+        description: The email address of the manager for this location.
+        config:
+          meta: {}
+          tags: []
+      - name: tax_rate
+        description: The tax rate applicable at this location.
+        config:
+          meta: {}
+          tags: []
+      - name: opened_date
+        description: The date when the store location was opened, truncated to the day.
+        config:
+          meta: {}
+          tags: []

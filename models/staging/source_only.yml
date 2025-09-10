@@ -2,35 +2,39 @@ sources:
   - name: raw
     description: E-commerce data for the Jaffle Shop
     tables:
+      # # lean version - source do not have column configs
       - name: raw_customers
         description: One record per person who has purchased one or more items
         config:
-          external_location: "jaffle-data/raw_customers.csv"
-          
+          external_location: jaffle-data/raw_customers.csv
+        columns: []
       - name: raw_orders
         description: One record per order (consisting of one or more order items)
         config:
-          external_location: "jaffle-data/raw_orders.csv"
+          external_location: jaffle-data/raw_orders.csv
+        columns: []
       - name: raw_items
         description: Items included in an order
         config:
-          external_location: "jaffle-data/raw_items.csv"
+          external_location: jaffle-data/raw_items.csv
+        columns: []
       - name: raw_stores
         description: Store that sells jaffles
         config:
-          external_location: "jaffle-data/raw_stores.csv"
-        
+          external_location: jaffle-data/raw_stores.csv
+        columns: []
       - name: raw_products
         description: One record per SKU for items sold in stores
         config:
-          external_location: "jaffle-data/raw_products.csv"
+          external_location: jaffle-data/raw_products.csv
+        columns: []
       - name: raw_supplies
         description: One record per supply per SKU of items sold in stores
         config:
-          external_location: "jaffle-data/raw_supplies.csv"
-
+          external_location: jaffle-data/raw_supplies.csv
+        columns: []
       - name: store_region_mapping
         description: mapping table for store <> region
         config:
-          external_location: "jaffle-data/store_region_mapping.csv"
-          
+          external_location: jaffle-data/store_region_mapping.csv
+        columns: []

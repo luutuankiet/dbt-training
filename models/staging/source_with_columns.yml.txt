@@ -1,0 +1,190 @@
+sources:
+  - name: raw
+    description: E-commerce data for the Jaffle Shop
+    tables:
+      # # full column description
+      - name: raw_customers
+        description: One record per person who has purchased one or more items
+        config:
+          external_location: ./jaffle-data/raw_customers.csv
+        columns:
+          - name: id
+            description: The unique identifier for the customer in the raw source system.
+            config:
+              meta: {}
+              tags: []
+          - name: name
+            description: The full name of the customer as recorded in the raw source system.
+            config:
+              meta: {}
+              tags: []
+      - name: raw_orders
+        description: One record per order (consisting of one or more order items)
+        config:
+          external_location: ./jaffle-data/raw_orders.csv
+        columns:
+          - name: id
+            description: The unique identifier for the order in the raw source system.
+            config:
+              meta: {}
+              tags: []
+          - name: customer
+            description: The unique identifier for the customer who placed the order.
+            config:
+              meta: {}
+              tags: []
+          - name: ordered_at
+            description: The timestamp when the order was placed.
+            config:
+              meta: {}
+              tags: []
+          - name: store_id
+            description: The unique identifier for the store where the order was placed.
+            config:
+              meta: {}
+              tags: []
+          - name: subtotal
+            description: The subtotal amount of the order in cents, before tax.
+            config:
+              meta: {}
+              tags: []
+          - name: tax_paid
+            description: The amount of tax paid for the order in cents.
+            config:
+              meta: {}
+              tags: []
+          - name: order_total
+            description: The total amount of the order in cents, including tax.
+            config:
+              meta: {}
+              tags: []
+      - name: raw_items
+        description: Items included in an order
+        config:
+          external_location: ./jaffle-data/raw_items.csv
+        columns:
+          - name: id
+            description: The unique identifier for the order item in the raw source system.
+            config:
+              meta: {}
+              tags: []
+          - name: order_id
+            description: The unique identifier for the order to which this item belongs.
+            config:
+              meta: {}
+              tags: []
+          - name: sku
+            description: The Stock Keeping Unit (SKU) identifier for the product.
+            config:
+              meta: {}
+              tags: []
+      - name: raw_stores
+        description: Store that sells jaffles
+        config:
+          external_location: ./jaffle-data/raw_stores.csv
+        columns:
+          - name: id
+            description: The unique identifier for the store in the raw source system.
+            config:
+              meta: {}
+              tags: []
+          - name: name
+            description: The name of the store location.
+            config:
+              meta: {}
+              tags: []
+          - name: opened_at
+            description: The timestamp when the store location was opened.
+            config:
+              meta: {}
+              tags: []
+          - name: tax_rate
+            description: The tax rate applicable at this store location.
+            config:
+              meta: {}
+              tags: []
+      - name: raw_products
+        description: One record per SKU for items sold in stores
+        config:
+          external_location: ./jaffle-data/raw_products.csv
+        columns:
+          - name: sku
+            description: The unique Stock Keeping Unit (SKU) for the product.
+            config:
+              meta: {}
+              tags: []
+          - name: name
+            description: The name of the product.
+            config:
+              meta: {}
+              tags: []
+          - name: type
+            description: The category or type of the product.
+            config:
+              meta: {}
+              tags: []
+          - name: price
+            description: The price of the product in cents.
+            config:
+              meta: {}
+              tags: []
+          - name: description
+            description: A brief description of the product.
+            config:
+              meta: {}
+              tags: []
+      - name: raw_supplies
+        description: One record per supply per SKU of items sold in stores
+        config:
+          external_location: ./jaffle-data/raw_supplies.csv
+        columns:
+          - name: id
+            description: A unique identifier for the supply.
+            config:
+              meta: {}
+              tags: []
+          - name: name
+            description: The name of the supply.
+            config:
+              meta: {}
+              tags: []
+          - name: cost
+            description: The cost of the supply in cents.
+            config:
+              meta: {}
+              tags: []
+          - name: perishable
+            description: Flag indicating if the supply is perishable (TRUE/FALSE).
+            config:
+              meta: {}
+              tags: []
+          - name: sku
+            description: The SKU of the product that uses this supply.
+            config:
+              meta: {}
+              tags: []
+      - name: store_region_mapping
+        description: mapping table for store <> region
+        config:
+          external_location: ./jaffle-data/store_region_mapping.csv
+        columns:
+          - name: store_id
+            description: The unique identifier for the store.
+            config:
+              meta: {}
+              tags: []
+          - name: region
+            description: The geographical region associated with the store.
+            config:
+              meta: {}
+              tags: []
+          - name: manager_name
+            description: The name of the manager for the store's region.
+            config:
+              meta: {}
+              tags: []
+          - name: manager_email
+            description: The email address of the manager for the store's region.
+            config:
+              meta: {}
+              tags: []

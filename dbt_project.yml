@@ -21,6 +21,9 @@ clean-targets:
 
 models:
   jaffle_shop:
+    # +dbt-osmosis: "{parent}.yml"
+    # +dbt-osmosis-options:
+    #   force-inherit-descriptions: true
     staging:
       +materialized: view
       +schema: staging
