@@ -1,11 +1,11 @@
 with
 
     source as (
-        select * from {{ ref("raw_stores") }}
+        select * from {{ source("raw", "raw_stores") }}
         ),
 
     region_mapping as (
-        select * from {{ ref("store_region_mapping") }}
+        select * from {{ source("raw","store_region_mapping") }}
         ),
 
     enriched_locations as (

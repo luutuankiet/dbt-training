@@ -1,23 +1,36 @@
 sources:
-  - name: ecom
-    schema: dbt_training_Y24
-    database: raw-data-438007
+  - name: raw
     description: E-commerce data for the Jaffle Shop
     tables:
       - name: raw_customers
         description: One record per person who has purchased one or more items
+        config:
+          external_location: "jaffle-data/raw_customers.csv"
+          
       - name: raw_orders
         description: One record per order (consisting of one or more order items)
-        loaded_at_field: ordered_at
+        config:
+          external_location: "jaffle-data/raw_orders.csv"
       - name: raw_items
         description: Items included in an order
+        config:
+          external_location: "jaffle-data/raw_items.csv"
       - name: raw_stores
-        loaded_at_field: opened_at
+        description: Store that sells jaffles
+        config:
+          external_location: "jaffle-data/raw_stores.csv"
+        
       - name: raw_products
         description: One record per SKU for items sold in stores
+        config:
+          external_location: "jaffle-data/raw_products.csv"
       - name: raw_supplies
         description: One record per supply per SKU of items sold in stores
-    freshness:
-      warn_after:
-        count: 3000
-        period: day
+        config:
+          external_location: "jaffle-data/raw_supplies.csv"
+
+      - name: store_region_mapping
+        description: mapping table for store <> region
+        config:
+          external_location: "jaffle-data/store_region_mapping.csv"
+          
