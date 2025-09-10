@@ -56,7 +56,9 @@ dbt-semantic-interfaces==0.7.5
 deepdiff==8.6.1
     # via dbt-common
 duckdb==1.3.2
-    # via dbt-duckdb
+    # via
+    #   dbt-duckdb
+    #   dbt-training
 idna==3.10
     # via requests
 importlib-metadata==8.7.0
