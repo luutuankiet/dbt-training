@@ -1,0 +1,28 @@
+{
+  "name": "dbt-duckdb-uv",
+  "build": {
+    // Tells Codespaces to build from the Dockerfile in the same directory
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "postCreateCommand": "uv run dbt deps",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "oderwat.indent-rainbow",
+        "vscode-icons-team.vscode-icons",
+        "redhat.vscode-yaml",
+        "mutantdino.resourcemonitor",
+        "usernamehw.errorlens",
+        "innoverio.vscode-dbt-power-user"
+      ],
+      "settings": {
+        "workbench.colorTheme": "Default Dark Modern",
+        "workbench.iconTheme": "vscode-icons",
+        "dbt.enableNewLineagePanel": true,
+        "dbt.dbtPythonPathOverride": "${workspaceFolder}/.venv/bin/python"
+      }
+    }
+  }
+}
